@@ -1,0 +1,39 @@
+# Formato de fichero de mapa:
+#   Línea 1:          <filas> <columnas>
+#   Líneas @xxx:      metadatos opcionales
+#     @start r c
+#     @goal r c
+#     @pit r c prob    (prob de muerte en [0,1])
+#     @coin r c bonus
+#   Resto:            1 línea por fila; cada carácter representa las paredes
+#                     de esa celda combinando las letras U R D L. Un '.' indica
+#                     celda sin paredes propias. Las paredes exteriores son
+#                     implícitas.
+#
+# Ejemplo: mapa 12x12 por defecto con un pozo en el centro y dos monedas.
+12 12
+@start 0 0
+@goal 11 7
+@pit 1 5 0.8
+@pit 3 9 0.6
+@pit 4 3 0.2
+@pit 6 11 0.9
+@pit 8 3 0.1
+@pit 10 8 0.7
+@coin 2 1 10
+@coin 4 1 5
+@coin 5 3 15
+@coin 8 9 5
+@coin 11 2 15
+..R......D..
+.R......R...
+..RD........
+.RR.......R.
+..U......R..
+...R........
+........D...
+.R..........
+..........R.
+....R.......
+........U...
+............

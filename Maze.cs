@@ -120,6 +120,7 @@ namespace QLearningConsole
                     break;
                 case CellKind.Coin:
                     r = RewardCoin + RewardStep;
+                    _kind[next] = CellKind.Empty;
                     break;
             }
 
@@ -173,6 +174,7 @@ namespace QLearningConsole
 
         public static Maze LoadFromFile(string path)
         {
+            path = "../../../" + path;
             string[] lines = File.ReadAllLines(path)
                 .Where(l => !string.IsNullOrWhiteSpace(l) && !l.TrimStart().StartsWith("#"))
                 .ToArray();

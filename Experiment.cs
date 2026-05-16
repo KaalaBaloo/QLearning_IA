@@ -36,10 +36,10 @@ namespace QLearningConsole
 
                 // get episodes and get success
                 var lastEpisodes = Episodes.Skip(Episodes.Count - episodesCount);
-                int sucess = lastEpisodes.Count(e => e.Reached);
+                int success = lastEpisodes.Count(e => e.Reached);
 
                 // calculate success rate
-                return sucess / episodesCount * 100;
+                return (double)success / episodesCount * 100;
 
             }
         }

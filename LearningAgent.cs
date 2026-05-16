@@ -107,11 +107,17 @@ namespace QLearningConsole
             int steps = 0;
             double totalReward = 0.0;
             bool done = false;
+            bool reachedGoal = false;
 
             while (!done && steps < maxSteps)
             {
                 var (nextState, r, isDone) = env.Step(state, (Action)action, _rng);
                 totalReward += r;
+
+                if (isDone && env.KindOf(nextState) == CellKind.Goal)
+                {
+                    reachedGoal = true;
+                }
 
                 int nextAction = 0;
                 if (!isDone)
@@ -134,7 +140,7 @@ namespace QLearningConsole
                 steps++;
             }
 
-            return new EpisodeResult(steps, totalReward, done && env.KindOf(state) == CellKind.Goal);
+            return new EpisodeResult(steps, totalReward, reachedGoal);
         }
     }
 
