@@ -11,16 +11,16 @@
       "RelativeMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|solutionrelative:visualizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|c:\\users\\kaala\\onedrive\\escritorio\\qlearning_ia\\learningagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|solutionrelative:learningagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|c:\\users\\kaala\\onedrive\\escritorio\\qlearning_ia\\maze.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|solutionrelative:maze.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|c:\\users\\kaala\\onedrive\\escritorio\\qlearning_ia\\experiment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|solutionrelative:experiment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|c:\\users\\kaala\\onedrive\\escritorio\\qlearning_ia\\learningagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{48EE9FE2-EFAF-49F7-20FA-2AE411132C57}|QLearningConsole.csproj|solutionrelative:learningagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,14 +40,14 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\kaala\\OneDrive\\Escritorio\\QLearning_IA\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAKoAAAAAAAAAAAAIwLQAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAwwI0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-29T18:54:35.344Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Maze.cs",
               "DocumentMoniker": "C:\\Users\\kaala\\OneDrive\\Escritorio\\QLearning_IA\\Maze.cs",
               "RelativeDocumentMoniker": "Maze.cs",
@@ -55,8 +55,7 @@
               "RelativeToolTip": "Maze.cs",
               "ViewState": "AgIAAGEAAAAAAAAAAAAowHoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-16T13:15:50.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-16T13:15:50.352Z"
             },
             {
               "$type": "Document",
@@ -66,27 +65,27 @@
               "RelativeDocumentMoniker": "Visualizer.cs",
               "ToolTip": "C:\\Users\\kaala\\OneDrive\\Escritorio\\QLearning_IA\\Visualizer.cs",
               "RelativeToolTip": "Visualizer.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAswFwAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAmwJEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-29T16:36:55.422Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "LearningAgent.cs",
               "DocumentMoniker": "C:\\Users\\kaala\\OneDrive\\Escritorio\\QLearning_IA\\LearningAgent.cs",
               "RelativeDocumentMoniker": "LearningAgent.cs",
               "ToolTip": "C:\\Users\\kaala\\OneDrive\\Escritorio\\QLearning_IA\\LearningAgent.cs",
               "RelativeToolTip": "LearningAgent.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAA2wFwAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAUwFwAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-29T18:09:44.619Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Experiment.cs",
               "DocumentMoniker": "C:\\Users\\kaala\\OneDrive\\Escritorio\\QLearning_IA\\Experiment.cs",
               "RelativeDocumentMoniker": "Experiment.cs",
@@ -94,8 +93,7 @@
               "RelativeToolTip": "Experiment.cs",
               "ViewState": "AgIAAGQAAAAAAAAAAAAiwHEAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T18:11:55.438Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-29T18:11:55.438Z"
             }
           ]
         }

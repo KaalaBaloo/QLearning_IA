@@ -27,7 +27,7 @@ namespace QLearningConsole
             Console.WriteLine("======================================================");
             Console.WriteLine();
 
-            //var config = ReadConfig();
+            var config = ReadConfig();
 
             // Entorno (Maze) ya implementado en Maze.cs
             //Maze env = Maze.BuildDefault5x5();
@@ -35,7 +35,29 @@ namespace QLearningConsole
             Console.WriteLine("Mapa:");
             Visualizer.PrintMaze(env);
 
+            Console.WriteLine("======================================================");
+            Console.WriteLine("Q-LEARNING (off-policy)");
+            Console.WriteLine("======================================================");
+            Console.WriteLine();
+            // create and run experiment
             var expConfig = new ExperimentConfig { };
+            ExperimentResult qlResult = RunExp(env, expConfig);
+
+            Console.WriteLine("======================================================");
+            Console.WriteLine("SARSA (on-policy)");
+            Console.WriteLine("======================================================");
+            Console.WriteLine();
+            // change experiment and log data
+            expConfig.Algo = Algorithm.Sarsa;
+            ExperimentResult sarsaResult = RunExp(env, expConfig);
+
+            // compare final results
+            PrintComparison(qlResult, sarsaResult);
+        }
+
+        private static ExperimentConfig experimentsMode(Maze env, ExperimentConfig expConfig)
+        {
+            var experimentConfig = new ExperimentConfig { };
             List<ExperimentResult> qlResults = new List<ExperimentResult>(seeds.Length);
             List<ExperimentResult> sarsaResults = new List<ExperimentResult>(seeds.Length);
 
@@ -43,19 +65,17 @@ namespace QLearningConsole
             {
                 for (int j = 0; j < seeds.Length; j++)
                 {
-                    int expNum = i * seeds.Length + j;
-
                     // actualizar config con nueva semilla
-                    expConfig = configs[i];
-                    expConfig.Seed = seeds[j];
+                    experimentConfig = configs[i];
+                    experimentConfig.Seed = seeds[j];
 
                     //Console.WriteLine("======================================================");
                     //Console.WriteLine("Q-LEARNING (off-policy)");
                     //Console.WriteLine("======================================================");
                     //Console.WriteLine();
                     // run experiment
-                    expConfig.Algo = Algorithm.QLearning;
-                    var qlResult = RunExp(env, expConfig, expNum * 2);
+                    experimentConfig.Algo = Algorithm.QLearning;
+                    var qlResult = RunExps(env, experimentConfig);
                     qlResults.Add(qlResult);
 
                     //Console.WriteLine("======================================================");
@@ -63,13 +83,13 @@ namespace QLearningConsole
                     //Console.WriteLine("======================================================");
                     //Console.WriteLine();
                     // change experiment and log data
-                    expConfig.Algo = Algorithm.Sarsa;
-                    var sarsaResult = RunExp(env, expConfig, expNum * 2 + 1);
-                    sarsaResults.Add(sarsaResult);                
+                    experimentConfig.Algo = Algorithm.Sarsa;
+                    var sarsaResult = RunExps(env, experimentConfig);
+                    sarsaResults.Add(sarsaResult);
                 }
 
                 // name config
-                Console.WriteLine($"Resultados promedio Config {i+1}: α={configs[i].Alpha}, γ={configs[i].Gamma}, ε={configs[i].EpsilonStart}→{configs[i].EpsilonEnd}");
+                Console.WriteLine($"Resultados promedio Config {i + 1}: α={configs[i].Alpha}, γ={configs[i].Gamma}, ε={configs[i].EpsilonStart}→{configs[i].EpsilonEnd}");
 
                 // export average reward and steps for this config all seeds
                 Console.WriteLine("Exportando resultados promedio de steps y reward QLearning y Sarsa");
@@ -90,30 +110,7 @@ namespace QLearningConsole
                 sarsaResults.Clear();
             }
 
-            //// Entorno (Maze) ya implementado en Maze.cs
-            ////Maze env = Maze.BuildDefault5x5();
-            //Maze env = Maze.LoadFromFile("mapa_peligroso.txt");
-            //Console.WriteLine("Mapa:");
-            //Visualizer.PrintMaze(env);
-
-            //Console.WriteLine("======================================================");
-            //Console.WriteLine("Q-LEARNING (off-policy)");
-            //Console.WriteLine("======================================================");
-            //Console.WriteLine();
-            //// create and run experiment
-            //var expConfig = new ExperimentConfig { };
-            //ExperimentResult qlResult = RunExp(env, expConfig);
-
-            //Console.WriteLine("======================================================");
-            //Console.WriteLine("SARSA (on-policy)");
-            //Console.WriteLine("======================================================");
-            //Console.WriteLine();
-            //// change experiment and log data
-            //expConfig.Algo = Algorithm.Sarsa;
-            //ExperimentResult sarsaResult = RunExp(env, expConfig);
-
-            //// compare final results
-            //PrintComparison(qlResult, sarsaResult);
+            return experimentConfig;
         }
 
         private static void ExportAverageRewardSteps(List<ExperimentResult> results, string path)
@@ -134,7 +131,7 @@ namespace QLearningConsole
         {
             var config = new ExperimentConfig();
 
-            config.Algo = ReadConfig("Algoritmo (Q-Learning | SARSA)", Algorithm.QLearning);
+            config.Algo = ReadConfig("Algoritmo (QLearning | Sarsa)", Algorithm.QLearning);
             config.Alpha = ReadConfig("Learning rate α", 0.1);
             config.Gamma = ReadConfig("Discount rate γ", 0.95);
             config.EpsilonStart = ReadConfig("Epsilon inicial", 1.0);
@@ -152,6 +149,7 @@ namespace QLearningConsole
             if (string.IsNullOrWhiteSpace(input)) return defaultValue;
             try
             {
+                if (typeof(T).IsEnum) return (T)Enum.Parse(typeof(T), input, ignoreCase: true);
                 return (T)Convert.ChangeType(input, typeof(T));
             }
             catch
@@ -174,32 +172,36 @@ namespace QLearningConsole
             Console.WriteLine($"Semilla aleatoria: {expConfig.Seed}");
         }
 
-        /// revisarrrrrr
-        private static ExperimentResult RunExp(Maze env, ExperimentConfig expConfig, int num)
+        private static ExperimentResult RunExp(Maze env, ExperimentConfig expConfig)
         {
-            // log data
-            //LogExp(env, expConfig);
+            //log data
+            LogExp(env, expConfig);
 
-            // run experiment and get results 
-            //Console.WriteLine("\nComenzando entrenamiento");
+            //run experiment and get results
+            Console.WriteLine("\nComenzando entrenamiento");
             ExperimentResult result = Experiment.Run(env, expConfig);
 
             // show summary, qtable, heatmap, policy
-            //Experiment.PrintSummary(result);
-            //if (result.Agent != null)
-            //{
-            //    Visualizer.PrintHeatmap(result.Agent, env);
-            //    Console.WriteLine();
-            //    Visualizer.PrintPolicy(result.Agent, env);
-            //    Console.WriteLine();
-            //    Visualizer.PrintQTable(result.Agent, env);
-            //}
+            Experiment.PrintSummary(result);
+            if (result.Agent != null)
+            {
+                Visualizer.PrintHeatmap(result.Agent, env);
+                Console.WriteLine();
+                Visualizer.PrintPolicy(result.Agent, env);
+                Console.WriteLine();
+                Visualizer.PrintQTable(result.Agent, env);
+            }
 
             // export learning curve
-            //Experiment.ExportCsv(result, $"learning_curve_{num}.csv");
-            //Console.WriteLine($"\nResultados exportados a 'learning_curve_{num}.csv'");
+            Experiment.ExportCsv(result, $"learning_curve_.csv");
+            Console.WriteLine($"\nResultados exportados a 'learning_curve_.csv'");
 
             // return result for later comparison
+            return result;
+        }
+        private static ExperimentResult RunExps(Maze env, ExperimentConfig expConfig)
+        {
+            ExperimentResult result = Experiment.Run(env, expConfig);
             return result;
         }
 
