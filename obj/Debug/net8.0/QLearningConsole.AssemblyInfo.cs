@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QLearningConsole")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4c56ca14b4235e4bbb15c951c33be77f9814c48")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb9f8a28f397431d7e0709d7dc2a80cd06819977")]
 [assembly: System.Reflection.AssemblyProductAttribute("QLearningConsole")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QLearningConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

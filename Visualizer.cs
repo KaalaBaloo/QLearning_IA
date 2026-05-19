@@ -86,6 +86,68 @@ namespace QLearningConsole
             Console.WriteLine(sb.ToString());
         }
 
+        public static void PrintAveragedPolicy(IList<ExperimentResult> results, Maze m)
+        {
+            Console.WriteLine("--- Política derivada de Q (flecha = argmax_a Q[s,a]) ---");
+            var arrows = new[] { "^", ">", "v", "<" };
+            int numActions = 4;
+
+            var sb = new StringBuilder();
+            sb.Append("+");
+            for (int c = 0; c < m.Cols; c++) sb.Append("---+");
+            sb.AppendLine();
+
+            for (int r = 0; r < m.Rows; r++)
+            {
+                sb.Append("|");
+                for (int c = 0; c < m.Cols; c++)
+                {
+                    int s = m.ToState(r, c);
+                    string cellStr;
+
+                    if (s == m.GoalState) cellStr = " G ";
+                    else if (m.KindOf(s) == CellKind.Pit) cellStr = " X ";
+                    else
+                    {
+                        // usar accion mas usada por los agentes entrenados con distintas semillas
+                        var votes = new int[numActions];
+                        int validAgents = 0;
+                        foreach (var res in results)
+                        {
+                            if (res.Agent == null) continue;
+                            bool allZero = res.Agent.Q[s, 0] == 0 && res.Agent.Q[s, 1] == 0 &&
+                                           res.Agent.Q[s, 2] == 0 && res.Agent.Q[s, 3] == 0;
+                            if (allZero) continue;
+                            votes[res.Agent.ArgMaxAction(s)]++;
+                            validAgents++;
+                        }
+
+                        if (validAgents == 0)
+                            cellStr = " . ";
+                        else
+                        {
+                            int bestA = Array.IndexOf(votes, votes.Max());
+                            cellStr = $" {arrows[bestA]} ";
+                        }
+                    }
+
+                    sb.Append(cellStr);
+                    sb.Append(m.IsWall(s, Action.Right) ? "|" : " ");
+                }
+                sb.AppendLine();
+
+                sb.Append("+");
+                for (int c = 0; c < m.Cols; c++)
+                {
+                    int s = m.ToState(r, c);
+                    sb.Append(m.IsWall(s, Action.Down) ? "---+" : "   +");
+                }
+                sb.AppendLine();
+            }
+
+            Console.WriteLine(sb.ToString());
+        }
+
         public static void PrintQTable(LearningAgent agent, Maze m)
         {
             // TODO: imprimir la tabla Q con columnas: Estado (r,c) | Up | Right | Down | Left
